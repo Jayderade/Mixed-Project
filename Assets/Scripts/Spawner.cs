@@ -6,6 +6,8 @@ public class Spawner : MonoBehaviour {
 
     public GameObject[] zombiePrefab;
 
+    public Transform target;
+
     public float spawnRadius = 1f;
     public float spawnRate = 20;
     public float minSpawnRate = 2;
@@ -64,6 +66,10 @@ public class Spawner : MonoBehaviour {
             Vector3 randomPos = transform.position + Random.insideUnitSphere * spawnRadius;
 
             clone.transform.position = randomPos;
+
+            AIAgent aiAgent =clone.GetComponent<AIAgent>();
+
+            aiAgent.target = target;
         }
     }
 }
