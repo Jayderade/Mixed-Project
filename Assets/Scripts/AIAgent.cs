@@ -13,11 +13,12 @@ public class AIAgent : MonoBehaviour {
     void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
+        
     }
 
 	// Use this for initialization
 	void Start () {
-		
+       
 	}
 	
 	// Update is called once per frame

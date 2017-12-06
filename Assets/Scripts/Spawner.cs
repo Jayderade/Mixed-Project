@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour {
 
     public Transform target;
 
+    public GameObject player;
+
     public float spawnRadius = 1f;
     public float spawnRate = 20;
     public float minSpawnRate = 2;
@@ -67,9 +69,12 @@ public class Spawner : MonoBehaviour {
 
             clone.transform.position = randomPos;
 
-            AIAgent aiAgent =clone.GetComponent<AIAgent>();
-
-            aiAgent.target = target;
+            
         }
+    }
+    void Awake()
+    {
+        player = GameObject.Find("Player");
+        target = player.transform;
     }
 }
