@@ -8,14 +8,19 @@ public class RegularZ : Zombie {
 
     protected override void Awake()
     {
+        health = 100;
         base.Awake();
         scream.enabled = false;
     }
 
     protected override void Update()
     {
-       
+        health = health - decay * Time.deltaTime;
         base.Update();
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void Attack()

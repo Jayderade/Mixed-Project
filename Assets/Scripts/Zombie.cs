@@ -8,7 +8,7 @@ public class Zombie : MonoBehaviour {
     [Header("Zombie")]    
     public Transform target;
     public GameObject player;  
-    public float dam = 10f;
+    public int damage = 10;
     public float decay = 1f;
     public float health = 100f;
     public float speed = 10f;
@@ -16,7 +16,7 @@ public class Zombie : MonoBehaviour {
     public float attackSpeed = 1f;
     public float attackDuration = 1f;
     public float checkDistance;
-    public float playerHP;
+    
 
     protected Rigidbody rigid;
     protected NavMeshAgent nav;
@@ -90,7 +90,7 @@ public class Zombie : MonoBehaviour {
         if (playerHealth.health >= 0f)
         {
             Debug.Log("Bitten");
-            playerHealth.TakeDamage(dam);
+            playerHealth.TakeDamage(damage);
         }
     }
 

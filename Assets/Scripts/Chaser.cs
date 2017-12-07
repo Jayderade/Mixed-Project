@@ -10,6 +10,7 @@ public class Chaser : Zombie {
 
     protected override void Awake()
     {
+        health = 150;
         base.Awake();
         scream.enabled = false;
         
@@ -17,14 +18,17 @@ public class Chaser : Zombie {
 
     protected override void Update()
     {
-        
+        health = health - decay * Time.deltaTime;
         base.Update();
         float distance = Vector3.Distance(transform.position, target.position);
         if(distance < screamRange)
         {
             scream.enabled = true;
         }
-        
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void Bite()
