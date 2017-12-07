@@ -27,9 +27,14 @@ public class Chaser : Zombie {
         
     }
 
+    protected override void Bite()
+    {
+        base.Bite();
+    }
+
     protected override void Attack()
-    {        
-        
+    {
+        base.Attack();
     }
 
     protected override void OnEndAttack()

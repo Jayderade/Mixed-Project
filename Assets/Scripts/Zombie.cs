@@ -8,13 +8,15 @@ public class Zombie : MonoBehaviour {
     [Header("Zombie")]    
     public Transform target;
     public GameObject player;  
-    public int dam = 10;
+    public float dam = 10f;
     public float decay = 1f;
     public float health = 100f;
     public float speed = 10f;
     public float attackRange = 5f;
     public float attackSpeed = 1f;
     public float attackDuration = 1f;
+    public float checkDistance;
+    public float playerHP;
 
     protected Rigidbody rigid;
     protected NavMeshAgent nav;
@@ -33,11 +35,13 @@ public class Zombie : MonoBehaviour {
         rigid = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         target = player.transform;
+       
     }
 
     protected virtual void Update()
     {
         
+
         if (target == null)
         {
             return;
@@ -48,9 +52,10 @@ public class Zombie : MonoBehaviour {
         {
             
             float distance = Vector3.Distance(transform.position, player.transform.position);
-            if(distance < attackRange)
+            checkDistance = distance;
+            if (distance < attackRange)
             {
-                
+                Debug.Log("Bite");
                 Attack();
                 attackTimer = 0f;
                 StartCoroutine(AttackDelay(attackDuration));
@@ -72,19 +77,26 @@ public class Zombie : MonoBehaviour {
         OnEndAttack();
     }
 
-    void Bite()
+    protected  virtual void Bite()
     {
 
 
-        Health playerHealth = GetComponent<Health>();
-        if (playerHealth != null)
+        Health playerHealth = player.GetComponent<Health>();
+
+
+        Debug.Log("wORK");
+                
+
+        if (playerHealth.health >= 0f)
         {
+            Debug.Log("Bitten");
             playerHealth.TakeDamage(dam);
         }
     }
 
     protected virtual void Attack()
     {
+        Debug.Log("Attack");
         Bite();
     }
     protected virtual void OnEndAttack()
